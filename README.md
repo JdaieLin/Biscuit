@@ -1,11 +1,9 @@
-# BiscuitServer
-BiscuitServer可以让微信小程序直接与服务器ip进行http通讯，避开域名校验。Using batch image tags to communicate between server and client. Design for wechat mini programs.
+# Biscuit 饼干服务器
+Biscuit可以让微信小程序直接与服务器ip进行http通讯，避开域名校验。
 
-### 饼干服务器
-BiscuitServer可以让微信小程序直接与服务器ip进行http通讯，避开域名校验。
 例如访问："http://192.168.100.20/users"
 
-注意：BiscuitServer原理是通过批量的空白图片的宽高来传输数据，只适用于传递轻量级的json数据/字符串/数字。
+注意：Biscuit原理是通过批量的空白图片的宽高来传输数据，只适用于传递轻量级的json数据/字符串/数字。
 
 ### 小程序端使用方法
 在小程序页面wxml文件和json文件中引入Plate控件
