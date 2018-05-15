@@ -1,0 +1,5 @@
+/* Plate.wxss */
+/* Create by Jdaie Lin. May 2018 */
+:host {
+   display: none;
+}

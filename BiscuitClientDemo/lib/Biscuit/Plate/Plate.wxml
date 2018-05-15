@@ -1,0 +1,5 @@
+<!-- Plate.wxml -->
+<!-- Create by Jdaie Lin. May 2018 -->
+<view>
+  <image wx:for="{{plate}}" wx:for-item="item" wx:key="*this.tid" src="{{item.src}}" bindload='loadHandler' binderror="errorHandler" data-type="{{item.type}}" data-tid="{{item.tid}}" data-parent-id="{{item.parentID}}" data-block-id="{{item.blockID}}"></image>
+</view>

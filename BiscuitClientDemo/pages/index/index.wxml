@@ -1,0 +1,9 @@
+<!-- index.wxml -->
+<!-- Biscuit Cient Demo -->
+<view class="container">
+  <view class="userinfo">
+    <text>Request counts : {{$plate.length}}</text>
+  </view>
+  <button class="btn" bindtap='bindtap'>test request</button>
+  <Plate plate="{{$plate}}"></Plate>
+</view>
