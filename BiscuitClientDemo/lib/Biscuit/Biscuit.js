@@ -135,7 +135,7 @@ Biscuit.prototype.poolEvent = function (e) {
 Biscuit.prototype.processGetResponse = function(tid, data){
   let responseData = {}
   let request = this.getRequsetById(tid)
-  responseData.code = data[0]
+  responseData.code = data[0] - 1
   responseData.hasData = (data[1]==2)
   request.responseData = responseData
   if(responseData.hasData){

@@ -18,16 +18,16 @@ BiscuitServer.prototype.middleWare = function(){
 			res.biscuit = (function(context,tid,res){
 				return function(arg1,arg2){
 					if(arg1 && arg2){
-						if(arg1 > 0 && arg1 <= 8192){
-							context.sendHead(res,tid,arg1,arg2);
+						if(arg1 >= 0 && arg1 <= 8192){
+							context.sendHead(res,tid,arg1 + 1,arg2);
 						}else{
-							console.warn("Response code must a interger between 1 ~ 8192.");
+							console.warn("Response code must a interger between 0 ~ 8192.");
 						}
-					}else if(arg1){
-						if(arg1 > 0 && arg1 <= 8192){
-							context.sendHead(res,tid,arg1);
+					}else if(arg1 != null){
+						if(arg1 >= 0 && arg1 <= 8192){
+							context.sendHead(res,tid,arg1 + 1);
 						}else{
-							console.warn("Response code must a interger between 1 ~ 8192. Send as data.");
+							console.warn("Response code must a interger between 0 ~ 8192. Send as data.");
 							context.sendHead(res,tid,200,arg1);
 						}
 					}
