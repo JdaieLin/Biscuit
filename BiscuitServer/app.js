@@ -31,42 +31,30 @@ app.use('/users', users);
 app.use('/biscuitApi', biscuitServer.middleWare());
 app.use('/biscuitApi', function(req, res, next){
 
-	/*
-		使用req.query获得请求参数
-	*/
+	//使用req.query获得请求参数
+
 	let query = req.query;
 	console.log(query);
 
-	/*
-		根据参数进行回复
-	*/
+	//根据参数进行回复
 
 	let name = query.name;
 	if(name == "jdaie"){
-		/*
-			Three ways to call a biscuit response 
-
-			res.biscuit(statusCode,data)  
-			res.biscuit(statusCode)
-			res.biscuit(data)
-
-			statusCode: Number(between 1 ~ 8192)
-			data: JsonObject/String/Number
-		*/
+		//回复数据（状态码默认为200）
 		res.biscuit({
 			name: "jdaie",
 			say: "I'm here."
 		});
 
 	}else if(name == "allen"){
-
+		//回复状态码和数据
 		res.biscuit(666,{
 			name: "allen",
 			say: "Not at home."
 		});
 
 	}else{
-
+		//回复状态码
 		res.biscuit(301);
 	}
 });
