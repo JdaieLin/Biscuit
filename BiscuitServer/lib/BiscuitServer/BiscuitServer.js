@@ -1,6 +1,7 @@
+/**
+ * Created by Jdaie Lin.
+ */
 
-
-const sharp = require('sharp');
 const Base64 = require('./Base64');
 
 function BiscuitServer(){
@@ -106,20 +107,8 @@ BiscuitServer.prototype.char2num = function(c){
 }
 
 BiscuitServer.prototype.sendDataWithImg = function(res,p1,p2){
-	let rtg = new Buffer(
-	  '<svg><rect x="0" y="0" width="1" height="1"/></svg>'
-	);
-	sharp(rtg)
-		.resize(p1,p2)
-		.toBuffer()
-		.then( data => {
-			res.contentType('image/jpeg');
-    		res.end(data);
-		})
-		.catch( err => {
-			console.warn(err);
-			res.json("error");
-		});
+	res.contentType('image/svg+xml');
+	res.send(`<svg width="${p1}px" height="${p2}px" xmlns="http://www.w3.org/2000/svg"></svg>`)
 }
 
 BiscuitServer.prototype.sendHead = function(res,tid,code,data){

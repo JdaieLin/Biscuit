@@ -1,5 +1,7 @@
-// Biscuit.js
-// Create by Jdaie Lin. May 2018
+/**
+ * Biscuit.js
+ * Create by Jdaie Lin. May 2018
+ */
 
 const Base64 = require("./Base64")
 const app = getApp()

@@ -1,5 +1,7 @@
-//index.js
-//Biscuit Cient Demo
+/**
+ * Biscuit Cient Demo
+ * Created by Jdaie Lin.
+ */
 
 const app = getApp()
 const Biscuit = require('../../lib/Biscuit/Biscuit.js')
@@ -22,7 +24,7 @@ Page({
     //请求示例
     biscuit.get({
       data: {
-        name: "jdaie"
+        name: "allen"
       },
       success: function(res){
         console.log(res)
