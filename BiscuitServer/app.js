@@ -47,7 +47,7 @@ app.use('/biscuitApi', function(req, res, next){
 		//回复状态码和数据
 		res.biscuit(666,{
 			name: "allen",
-			say: "Not at home."
+			say: "Hi I am not at home"
 		});
 
 	}else{

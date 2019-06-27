@@ -152,6 +152,8 @@ Biscuit.prototype.processDataResponse = function(tid, data, pid, bid) {
   if(bid == 0){
     //dataHead
     parent.responseData.dataLength = data[0]
+    parent.responseData.level = data[1]
+    parent.responseData.startTime = new Date().getTime()
     if(this.debug)
       console.warn("Get data block length :" + data[0])
     this.getDataBlocks(pid)
@@ -163,13 +165,13 @@ Biscuit.prototype.processDataResponse = function(tid, data, pid, bid) {
       parent.responseData.rawArrayLength = 0
     }
     let rawArray = parent.responseData.rawArray
-    let str = this.decodeData(data[0]) + this.decodeData(data[1])
-    rawArray[bid-1] = str
+    let dataLevel = parent.responseData.level
+    rawArray[bid - 1] = this.decodeData(data[0], dataLevel) + this.decodeData(data[1], dataLevel)
     parent.responseData.rawArrayLength = 0
     request.done = true
     for (let i in rawArray){
-      if (rawArray[i])
-        parent.responseData.rawArrayLength+=1
+      if (rawArray[i] !== null)
+        parent.responseData.rawArrayLength += 1
     }
     if (parent.responseData.rawArrayLength == parent.responseData.dataLength){
       this.finishDataRequest(pid)
@@ -183,6 +185,8 @@ Biscuit.prototype.finishDataRequest = function(tid){
   let base64String = rawArray.join("")
   request.responseData.data = JSON.parse(Base64.decode(base64String))
   request.responseData.base64String = base64String
+  request.responseData.endTime = new Date().getTime()
+  request.responseData.spendTime = request.responseData.endTime - request.responseData.startTime
   this.finishRequest(tid)
 }
 
@@ -245,8 +249,25 @@ Biscuit.prototype.getRequsetById = function(tid){
   return this.context.data[this.plateName]["id_" + tid]
 }
 
-Biscuit.prototype.decodeData = function(digt){
-  return (digt <= 65) ? Base64._keyStr[digt - 1] : ""
+Biscuit.prototype.decodeData = function(digt, dataLevel){
+  let result = ''
+  let resultArray = [digt]
+  let currentLevel = dataLevel
+  while (currentLevel > 1) {
+    currentLevel --
+    let tempArray = []
+    resultArray.map(item => {
+      let num1 = Math.floor(item / Math.pow(67, currentLevel))
+      let num2 = item % Math.pow(67, currentLevel)
+      tempArray.push (num1, num2)
+    })
+    resultArray = tempArray
+  }
+  // console.log(resultArray)
+  resultArray.map(item => {
+    result += (item <= 65) ? Base64._keyStr[item - 1] : ""
+  })
+  return result
 }
 
 Biscuit.prototype.getTransactionID = function () {

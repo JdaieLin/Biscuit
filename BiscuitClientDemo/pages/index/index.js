@@ -28,6 +28,7 @@ Page({
       },
       success: function(res){
         console.log(res)
+        console.log("Time spend: ", res.spendTime)
         if(res.hasData) 
           console.log("Recieve data : ", res.data)
       },
@@ -59,6 +60,7 @@ Page({
       },
       success: function (res) {
         console.log(res)
+        console.log("Time spend: ", res.spendTime)
         if (res.hasData)
           console.log("Recieve data : ",res.data)
       },
